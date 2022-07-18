@@ -31,13 +31,13 @@ abstract class WinTrackerPlatform extends PlatformInterface {
     throw UnimplementedError('screenSnapShot() has not been implemented.');
   }
 
-  Future<void> registerKeyboardHook() {
-    throw UnimplementedError('registerKeyboardHook() has not been implemented.');
+  Stream<dynamic> streamMouseEventFromNative() {
+    throw UnimplementedError('streamMouseEventFromNative() has not been implemented.');
+  }
+  Stream<dynamic> streamKeyboardEventFromNative() {
+    throw UnimplementedError('streamKeyboardEventFromNative() has not been implemented.');
   }
 
-  Future<void> registerMouseHook() {
-    throw UnimplementedError('registerMouseHook() has not been implemented.');
-  }
 
   Future<void> requestPermission({required bool onlyOpenPrefPane}) {
     throw UnimplementedError('requestPermission() has not been implemented.');

@@ -65,7 +65,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   late WinTracker _winTracker;
-
+  late StreamSubscription keyBoardStreamSubscription;
+  late StreamSubscription mouseStreamSubscription;
   @override
   void initState() {
     super.initState();
@@ -94,13 +95,55 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               child: Text("Capture Screen", style: TextStyle(color: Colors.white),),),
             SizedBox(height: 10,),
-            MaterialButton(
-              padding: EdgeInsets.symmetric(horizontal: 40),
-              color: Colors.blue,
-              onPressed: ()async{
-                _winTracker.registerKeyboardHook();
-              },
-              child: Text("KeyBoard Hook", style: TextStyle(color: Colors.white),),)
+           Container(
+             height: 50,
+             child: Row(
+               mainAxisAlignment: MainAxisAlignment.spaceAround,
+               children: [
+                 MaterialButton(
+                   padding: EdgeInsets.symmetric(horizontal: 40),
+                   color: Colors.blue,
+                   onPressed: ()async{
+                     keyBoardStreamSubscription = _winTracker.streamKeyboardHook().listen((event) {
+                       print(event);
+                     });
+                   },
+                   child: const Text("Start KeyBoard Hook", style: TextStyle(color: Colors.white),),),
+                 MaterialButton(
+                   padding: EdgeInsets.symmetric(horizontal: 40),
+                   color: Colors.blue,
+                   onPressed: ()async{
+                     keyBoardStreamSubscription.cancel();
+                   },
+                   child: const Text("Stop KeyBoard Hook", style: TextStyle(color: Colors.white),),),
+               ],
+             ),
+           ),
+            SizedBox(height: 10,),
+            Container(
+              height: 50,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  MaterialButton(
+                    padding: EdgeInsets.symmetric(horizontal: 40),
+                    color: Colors.blue,
+                    onPressed: ()async{
+                      mouseStreamSubscription = _winTracker.streamMouseHook().listen((event) {
+                        print(event);
+                      });
+                    },
+                  child: const Text("Start Mouse Hook", style: TextStyle(color: Colors.white),),),
+                  MaterialButton(
+                    padding: EdgeInsets.symmetric(horizontal: 40),
+                    color: Colors.blue,
+                    onPressed: ()async{
+                      mouseStreamSubscription.cancel();
+                    },
+                    child: const Text("Stop Mouse Hook", style: TextStyle(color: Colors.white),),),
+                ],
+              ),
+            ),
           ],
         ),
       ),

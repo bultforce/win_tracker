@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -10,12 +11,15 @@ class MethodChannelWinTracker extends WinTrackerPlatform {
   /// The method channel used to interact with the native platform.
   @visibleForTesting
   final methodChannel = const MethodChannel('win_tracker');
-
+  var keyBoardEventChannel = const EventChannel('win_tracker_keyboard');
+  var mouseEventChannel = const EventChannel('win_tracker_mouse');
+  late StreamSubscription<dynamic> keyBoardSubscription;
   @override
   Future<String?> getPlatformVersion() async {
     final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
   }
+
 
   @override
   Future<bool?> getScreenSnapShot({required String fileName, required String filePath}) async{
@@ -26,12 +30,15 @@ class MethodChannelWinTracker extends WinTrackerPlatform {
   }
 
   @override
-  Future<void> registerKeyboardHook() async{
-    return await methodChannel.invokeMethod('registerKeyboardHook',);
+  Stream<dynamic> streamKeyboardEventFromNative() {
+    return keyBoardEventChannel.receiveBroadcastStream("keyBoard_event").map((event) => event);
   }
+
   @override
-  Future<void> registerMouseHook() async{
-    return await methodChannel.invokeMethod('registerMouseHook',);
+  Stream<dynamic> streamMouseEventFromNative() {
+    return mouseEventChannel.receiveBroadcastStream("mouse_event").map((event) {
+      return event;
+    });
   }
   @override
   Future<void> requestPermission({required bool onlyOpenPrefPane}) async{

@@ -1,7 +1,7 @@
 name: win_tracker
-description: A new Flutter project.
+description: A package for get screen capture in flutter
 version: 0.0.1
-homepage:
+homepage: https://github.com/bultforce/win_tracker
 
 environment:
   sdk: ">=2.17.6 <3.0.0"

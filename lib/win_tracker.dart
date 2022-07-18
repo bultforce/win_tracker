@@ -22,12 +22,12 @@ class WinTracker {
     }
   }
 
-  Future<void> registerKeyboardHook() {
-    return WinTrackerPlatform.instance.registerKeyboardHook();
+  Stream<dynamic> streamKeyboardHook() {
+    return WinTrackerPlatform.instance.streamKeyboardEventFromNative();
   }
 
-  Future<void> registerMouseHook() {
-    return WinTrackerPlatform.instance.registerMouseHook();
+  Stream<dynamic> streamMouseHook() {
+    return WinTrackerPlatform.instance.streamMouseEventFromNative();
   }
 
   Future<void> requestPermission({ bool onlyOpenPrefPane = false}) {
