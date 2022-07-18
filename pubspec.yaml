@@ -1,6 +1,6 @@
 name: win_tracker
 description: A package for get screen capture in flutter
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/bultforce/win_tracker
 
 environment:
