@@ -50,10 +50,17 @@ class MethodChannelWinTracker extends WinTrackerPlatform {
     }
   }
 
-
   @override
   Future<bool?> isAccessAllowed() async{
     return await methodChannel.invokeMethod('isAccessAllowed',);
   }
 
+  @override
+  Future<String?> getOpenUrl() async{
+    return await methodChannel.invokeMethod('getOpenUrl',);
+  }
+  @override
+  Future<String?> getOpenWindowTitle() async{
+    return await methodChannel.invokeMethod('getOpenWindowTitle');
+  }
 }

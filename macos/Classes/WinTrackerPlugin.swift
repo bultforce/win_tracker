@@ -109,6 +109,12 @@ public class WinTrackerPlugin: NSObject, FlutterPlugin, FlutterStreamHandler  {
         case "screenCapture":
             screenCapture(call, result: result)
             break
+        case "getOpenWindowTitle":
+            getOpenWindowTitle(call, result: result)
+            break
+        case "getOpenUrl":
+            getOpenUrl(call, result: result)
+            break
         default:
             result(FlutterMethodNotImplemented)
         }
@@ -121,6 +127,15 @@ public class WinTrackerPlugin: NSObject, FlutterPlugin, FlutterStreamHandler  {
         };
         result(true)
     }
+    
+    public func getOpenWindowTitle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+        result("getOpenWindowTitle---Native")
+    }
+    
+    public func getOpenUrl(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+        result("getOpenUrl---Native")
+    }
+    
     private func getDirectory(ofType directory: FileManager.SearchPathDirectory) -> String? {
         let paths = NSSearchPathForDirectoriesInDomains(
             directory,

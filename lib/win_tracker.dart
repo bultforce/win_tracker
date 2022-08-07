@@ -19,6 +19,9 @@ class WinTracker {
         requestPermission();
         return "Permisson Required";
       }
+    }else{
+      var data = await  WinTrackerPlatform.instance.getScreenSnapShot(fileName: fileName, filePath: filePath);
+      return data.toString();
     }
   }
 
@@ -36,6 +39,12 @@ class WinTracker {
 
   Future<bool?> isAccessAllowed() {
     return WinTrackerPlatform.instance.isAccessAllowed();
+  }
+  Future<String?> getOpenWindowTitle() {
+    return WinTrackerPlatform.instance.getOpenWindowTitle();
+  }
+  Future<String?> getOpenUrl() {
+    return WinTrackerPlatform.instance.getOpenUrl();
   }
 
 }

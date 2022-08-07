@@ -144,6 +144,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
+            MaterialButton(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              color: Colors.blue,
+              onPressed: ()async{
+                _winTracker.getOpenWindowTitle().then((value){
+                  print("getOpenWindowTitle---$value");
+                });
+                 },
+              child: const Text("Window Title", style: TextStyle(color: Colors.white),),),
+            SizedBox(height: 10,),
+            MaterialButton(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              color: Colors.blue,
+              onPressed: ()async{
+                _winTracker.getOpenUrl().then((value){
+                  print("getOpenUrl---$value");
+                });
+              },
+              child: const Text("Url", style: TextStyle(color: Colors.white),),),
           ],
         ),
       ),

@@ -46,4 +46,12 @@ abstract class WinTrackerPlatform extends PlatformInterface {
   Future<bool?> isAccessAllowed() {
     throw UnimplementedError('isAccessAllowed() has not been implemented.');
   }
+
+  Future<String?> getOpenWindowTitle(){
+    throw UnimplementedError('getOpenWindowTitle() has not been implemented.');
+  }
+
+  Future<String?> getOpenUrl(){
+    throw UnimplementedError('getOpenUrl() has not been implemented.');
+  }
 }
