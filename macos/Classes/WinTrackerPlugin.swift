@@ -1,4 +1,5 @@
 import Cocoa
+import Foundation
 import FlutterMacOS
 
 
@@ -120,6 +121,7 @@ public class WinTrackerPlugin: NSObject, FlutterPlugin, FlutterStreamHandler  {
         }
     }
     
+    
     public func isAccessAllowed(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         if #available(macOS 10.16, *) {
             result(CGPreflightScreenCaptureAccess())
@@ -129,11 +131,45 @@ public class WinTrackerPlugin: NSObject, FlutterPlugin, FlutterStreamHandler  {
     }
     
     public func getOpenWindowTitle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        result("getOpenWindowTitle---Native")
+        let app = NSWorkspace.shared.frontmostApplication
+        result(app!.localizedName!)
     }
-    
-    public func getOpenUrl(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        result("getOpenUrl---Native")
+    public func getOpenUrl(_ call: FlutterMethodCall, result: @escaping FlutterResult){
+        let args:[String: Any] = call.arguments as! [String: Any]
+        let browserName: String = args["browserName"] as! String
+        guard let scriptText = getScriptText(browserName) else {return }
+        var error: NSDictionary?
+        guard let script = NSAppleScript(source: scriptText) else { return }
+        guard let outputString = script.executeAndReturnError(&error).stringValue else {
+            if let error = error {
+                print(error.description)
+                return
+            }
+            return
+        }
+        // clean url output - remove protocol & unnecessary "www."
+        if let url = URL(string: outputString),
+            var host = url.host {
+           // print("Host: \(host)")
+           //  print("Path: \(url.path)")
+
+            if host.hasPrefix("www.") {
+                host = String(host.dropFirst(4))
+            }
+            let resultURL = "\(url.absoluteString)"
+            result(resultURL)
+        }
+    return
+    }
+    func getScriptText(_ appName: String) -> String? {
+        switch appName {
+        case "Google Chrome":
+            return "tell app \"Google Chrome\" to get the url of the active tab of window 1"
+        case "Safari":
+            return "tell application \"Safari\" to return URL of front document"
+        default:
+            return nil
+        }
     }
     
     private func getDirectory(ofType directory: FileManager.SearchPathDirectory) -> String? {

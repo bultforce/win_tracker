@@ -56,11 +56,13 @@ class MethodChannelWinTracker extends WinTrackerPlatform {
   }
 
   @override
-  Future<String?> getOpenUrl() async{
-    return await methodChannel.invokeMethod('getOpenUrl',);
+  Future<String?> getOpenUrl({required String browserName}) async{
+    var optionMap = <String, String?>{};
+    optionMap.putIfAbsent("browserName", () => browserName );
+    return await methodChannel.invokeMethod('getOpenUrl',optionMap);
   }
   @override
-  Future<String?> getOpenWindowTitle() async{
+  Future<dynamic> getOpenWindowTitle() async{
     return await methodChannel.invokeMethod('getOpenWindowTitle');
   }
 }

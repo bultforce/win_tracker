@@ -85,71 +85,22 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             MaterialButton(
-              padding: EdgeInsets.symmetric(horizontal: 40),
-              color: Colors.blue,
-              onPressed: ()async{
-                var path = await getApplicationDocumentsDirectory();
-                _winTracker.getScreenSnapShot(fileName: "${DateTime.now().millisecondsSinceEpoch}.png", filePath: path.path).then((value) {
-                  print(value);
-                });
-              },
-              child: Text("Capture Screen", style: TextStyle(color: Colors.white),),),
-            SizedBox(height: 10,),
-           Container(
-             height: 50,
-             child: Row(
-               mainAxisAlignment: MainAxisAlignment.spaceAround,
-               children: [
-                 MaterialButton(
-                   padding: EdgeInsets.symmetric(horizontal: 40),
-                   color: Colors.blue,
-                   onPressed: ()async{
-                     keyBoardStreamSubscription = _winTracker.streamKeyboardHook().listen((event) {
-                       print(event);
-                     });
-                   },
-                   child: const Text("Start KeyBoard Hook", style: TextStyle(color: Colors.white),),),
-                 MaterialButton(
-                   padding: EdgeInsets.symmetric(horizontal: 40),
-                   color: Colors.blue,
-                   onPressed: ()async{
-                     keyBoardStreamSubscription.cancel();
-                   },
-                   child: const Text("Stop KeyBoard Hook", style: TextStyle(color: Colors.white),),),
-               ],
-             ),
-           ),
-            SizedBox(height: 10,),
-            Container(
-              height: 50,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  MaterialButton(
-                    padding: EdgeInsets.symmetric(horizontal: 40),
-                    color: Colors.blue,
-                    onPressed: ()async{
-                      mouseStreamSubscription = _winTracker.streamMouseHook().listen((event) {
-                        print(event);
-                      });
-                    },
-                  child: const Text("Start Mouse Hook", style: TextStyle(color: Colors.white),),),
-                  MaterialButton(
-                    padding: EdgeInsets.symmetric(horizontal: 40),
-                    color: Colors.blue,
-                    onPressed: ()async{
-                      mouseStreamSubscription.cancel();
-                    },
-                    child: const Text("Stop Mouse Hook", style: TextStyle(color: Colors.white),),),
-                ],
-              ),
-            ),
-            MaterialButton(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               color: Colors.blue,
               onPressed: ()async{
-                _winTracker.getOpenWindowTitle().then((value){
-                  print("getOpenWindowTitle---$value");
+                Timer.periodic(Duration(seconds: 5), (timer) {
+                  _winTracker.getOpenWindowTitle().then((value){
+                    print("getOpenWindowTitle---$value");
+                    if(value=="Google Chrome"){
+                      _winTracker.getOpenUrl(browserName: "Google Chrome").then((value) {
+                        print("getOpenUrl--Chrome-$value");
+                      });
+                    }else if(value=="Safari"){
+                      _winTracker.getOpenUrl(browserName: "Google Chrome").then((value) {
+                        print("getOpenUrl--safari---$value");
+                      });
+                    }
+                  });
                 });
                  },
               child: const Text("Window Title", style: TextStyle(color: Colors.white),),),
@@ -158,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 40),
               color: Colors.blue,
               onPressed: ()async{
-                _winTracker.getOpenUrl().then((value){
+                _winTracker.getOpenUrl(browserName:"nk" ).then((value){
                   print("getOpenUrl---$value");
                 });
               },

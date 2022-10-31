@@ -40,11 +40,12 @@ class WinTracker {
   Future<bool?> isAccessAllowed() {
     return WinTrackerPlatform.instance.isAccessAllowed();
   }
-  Future<String?> getOpenWindowTitle() {
-    return WinTrackerPlatform.instance.getOpenWindowTitle();
+  Future<dynamic> getOpenWindowTitle()async{
+    var windows = await WinTrackerPlatform.instance.getOpenWindowTitle();
+    return windows;
   }
-  Future<String?> getOpenUrl() {
-    return WinTrackerPlatform.instance.getOpenUrl();
+  Future<String?> getOpenUrl({required String browserName}) {
+    return WinTrackerPlatform.instance.getOpenUrl(browserName: browserName);
   }
 
 }
