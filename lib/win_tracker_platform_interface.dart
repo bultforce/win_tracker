@@ -23,35 +23,8 @@ abstract class WinTrackerPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
-  }
-
-  Future<bool?> getScreenSnapShot({required String fileName, required String filePath}) {
-    throw UnimplementedError('screenSnapShot() has not been implemented.');
-  }
-
-  Stream<dynamic> streamMouseEventFromNative() {
-    throw UnimplementedError('streamMouseEventFromNative() has not been implemented.');
-  }
-  Stream<dynamic> streamKeyboardEventFromNative() {
-    throw UnimplementedError('streamKeyboardEventFromNative() has not been implemented.');
-  }
-
-
-  Future<void> requestPermission({required bool onlyOpenPrefPane}) {
-    throw UnimplementedError('requestPermission() has not been implemented.');
-  }
-
-  Future<bool?> isAccessAllowed() {
-    throw UnimplementedError('isAccessAllowed() has not been implemented.');
-  }
-
   Future<dynamic> getOpenWindowTitle(){
     throw UnimplementedError('getOpenWindowTitle() has not been implemented.');
   }
 
-  Future<String?> getOpenUrl({required String browserName}){
-    throw UnimplementedError('getOpenUrl() has not been implemented.');
-  }
 }

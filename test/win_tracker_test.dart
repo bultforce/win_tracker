@@ -12,28 +12,47 @@ class MockWinTrackerPlatform
   Future<String?> getPlatformVersion() => Future.value('42');
 
   @override
-  Future<String?> getScreenSnapShot({required String fileName, required String filePath}) {
+  Future<String?> getOpenUrl({required String browserName}) {
+    // TODO: implement getOpenUrl
+    throw UnimplementedError();
+  }
+
+  @override
+  Future getOpenWindowTitle() {
+    // TODO: implement getOpenWindowTitle
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool?> getScreenSnapShot({required String fileName, required String filePath}) {
     // TODO: implement getScreenSnapShot
     throw UnimplementedError();
   }
 
   @override
-  Future<void> registerKeyboardHook() {
-    // TODO: implement registerKeyboardHook
+  Future<bool?> isAccessAllowed() {
+    // TODO: implement isAccessAllowed
     throw UnimplementedError();
   }
 
   @override
-  Future<void> registerMouseHook() {
-    // TODO: implement registerMouseHook
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<bool?> requestPermission() {
+  Future<void> requestPermission({required bool onlyOpenPrefPane}) {
     // TODO: implement requestPermission
     throw UnimplementedError();
   }
+
+  @override
+  Stream streamKeyboardEventFromNative() {
+    // TODO: implement streamKeyboardEventFromNative
+    throw UnimplementedError();
+  }
+
+  @override
+  Stream streamMouseEventFromNative() {
+    // TODO: implement streamMouseEventFromNative
+    throw UnimplementedError();
+  }
+
 }
 
 void main() {
@@ -43,11 +62,5 @@ void main() {
     expect(initialPlatform, isInstanceOf<MethodChannelWinTracker>());
   });
 
-  test('getPlatformVersion', () async {
-    WinTracker winTrackerPlugin = WinTracker();
-    MockWinTrackerPlatform fakePlatform = MockWinTrackerPlatform();
-    WinTrackerPlatform.instance = fakePlatform;
-  
-    expect(await winTrackerPlugin.getPlatformVersion(), '42');
-  });
+
 }
