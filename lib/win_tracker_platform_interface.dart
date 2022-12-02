@@ -26,5 +26,11 @@ abstract class WinTrackerPlatform extends PlatformInterface {
   Future<dynamic> getOpenWindowTitle(){
     throw UnimplementedError('getOpenWindowTitle() has not been implemented.');
   }
+  Future<void> requestPermission({required bool onlyOpenPrefPane}) {
+    throw UnimplementedError('requestPermission() has not been implemented.');
+  }
 
+  Future<bool?> isAccessAllowed() {
+    throw UnimplementedError('isAccessAllowed() has not been implemented.');
+  }
 }
