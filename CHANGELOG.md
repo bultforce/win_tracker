@@ -3,5 +3,6 @@
 ## 0.0.3  adding app tracking in app
 ## 0.0.4  adding url tracking in app
 ## 0.0.5  adding url tracking in for linux
+## 0.0.6  version downgrade
 
 * TODO: Describe initial release.
