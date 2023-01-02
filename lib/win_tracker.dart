@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:win32/win32.dart';
 import 'win_tracker_platform_interface.dart';
 import 'dart:async';
 import 'dart:io' show Platform, Directory;
@@ -13,6 +14,8 @@ typedef ReverseNative = Pointer<Utf8> Function();
 typedef Reverse = Pointer<Utf8> Function();
 class WinTracker {
 
+  String? windowTitle;
+  int i =0;
   Future<dynamic> getOpenWindowTitle({String? libPath})async{
     if(Platform.isMacOS){
       var windows = await WinTrackerPlatform.instance.getOpenWindowTitle();
@@ -37,7 +40,22 @@ class WinTracker {
        }
     }
 
-  }
+  }else if(Platform.isWindows){
+     return enumerateWindows();
+    }
 
 }
+  String? enumerateWindows() {
+    final hWnd= GetForegroundWindow();
+    if (IsWindowVisible(hWnd) == FALSE) return null;
+    final length = GetWindowTextLength(hWnd);
+    if (length == 0) {
+      return null;
+    }
+    final buffer = wsalloc(length + 1);
+    GetWindowText(hWnd, buffer, length + 1);
+    String windowTitle = buffer.toDartString();
+    free(buffer);
+    return windowTitle;
+  }
 }

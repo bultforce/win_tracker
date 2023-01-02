@@ -64,9 +64,9 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.blue,
               onPressed: ()async{
                 Timer.periodic(Duration(seconds: 5), (timer) {
-                  _winTracker.getOpenWindowTitle().then((value){
-                    print("getOpenWindowTitle--$value");
-                  });
+                _winTracker.getOpenWindowTitle().then((value){
+                                  print("getOpenWindowTitle--$value");
+                                });
                 });
                  },
               child: const Text("Window Title", style: TextStyle(color: Colors.white),),),
