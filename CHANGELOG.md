@@ -5,5 +5,6 @@
 ## 0.0.5  adding url tracking in for linux
 ## 0.0.6  version downgrade
 ## 0.0.7  adding support for windows
+## 0.0.8  downgrade package
 
 * TODO: Describe initial release.
