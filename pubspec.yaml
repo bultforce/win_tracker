@@ -1,6 +1,6 @@
 name: win_tracker
-description: A package for get screen capture in flutter
-version: 0.0.6
+description: A package for get open window title in flutter
+version: 0.0.7
 homepage: https://github.com/bultforce/win_tracker
 
 environment:
@@ -13,7 +13,7 @@ dependencies:
   plugin_platform_interface: ^2.0.2
   path: ^1.8.0
   ffi: ^2.0.0
-  win32: ^2.7.0
+  win32: ^3.0.0
 
 dev_dependencies:
   flutter_test:
